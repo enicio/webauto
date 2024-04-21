@@ -2,9 +2,18 @@ import { CarRepository, CarInput, CarOutput } from '../car-repository'
 import { v4 as uuidv4 } from 'uuid'
 
 export class InMemoryCarRepository implements CarRepository {
-  public items: CarInput[] = []
-  findById(id: string): Promise<CarOutput> {
-    throw new Error('Method not implemented.')
+  public items: CarOutput[] = []
+  async findById(id: string): Promise<CarOutput | null> {
+    const car = this.items.find((item) => item.id === id)
+    if (!car) {
+      return null
+    }
+    return {
+      id: car.id as string,
+      plate: car.plate,
+      color: car.color,
+      brand: car.brand,
+    }
   }
 
   async create(data: CarInput): Promise<CarOutput> {

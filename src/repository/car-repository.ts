@@ -13,7 +13,7 @@ export interface CarOutput {
 }
 
 export interface CarRepository {
-  findById(id: string): Promise<CarOutput>
+  findById(id: string): Promise<CarOutput | null>
   create(data: CarInput): Promise<CarOutput>
   getAll(): Promise<CarOutput[]>
 }

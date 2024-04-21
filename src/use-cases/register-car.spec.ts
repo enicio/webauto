@@ -50,4 +50,24 @@ describe('Register Car', () => {
     console.log(allCars)
     expect(allCars).toHaveLength(3)
   })
+
+  test('Should register a car without id', async () => {
+    const inMemoryCarRepository = new InMemoryCarRepository()
+    const registerCar = new ResgisterCarUseCase(inMemoryCarRepository)
+    const { car } = await registerCar.execute({
+      id: '1',
+      brand: 'VW',
+      color: 'branca',
+      plate: 'eee-0203',
+    })
+
+    const carFound = await inMemoryCarRepository.findById(car.id)
+
+    expect(carFound).toEqual({
+      id: '1',
+      brand: 'VW',
+      color: 'branca',
+      plate: 'eee-0203',
+    })
+  })
 })
