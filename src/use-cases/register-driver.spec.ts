@@ -5,8 +5,8 @@ import { ResgisterDriverUseCase } from './register-driver'
 describe('Register driver', () => {
   test('Should register a driver', async () => {
     const inMemoryDriverRepository = new InMemoryDriverRepository()
-    const registerCar = new ResgisterDriverUseCase(inMemoryDriverRepository)
-    const { driver } = await registerCar.execute({
+    const registerDriver = new ResgisterDriverUseCase(inMemoryDriverRepository)
+    const { driver } = await registerDriver.execute({
       id: '1',
       name: 'João',
     })

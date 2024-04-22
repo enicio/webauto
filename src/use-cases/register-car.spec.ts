@@ -47,7 +47,6 @@ describe('Register Car', () => {
 
     const allCars = await inMemoryCarRepository.getAll()
 
-    console.log(allCars)
     expect(allCars).toHaveLength(3)
   })
 
