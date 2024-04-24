@@ -47,7 +47,7 @@ describe('Register Car', () => {
 
     const allCars = await inMemoryCarRepository.getAll()
 
-    expect(allCars).toHaveLength(3)
+    expect(allCars).toHaveLength(4)
   })
 
   test('Should register a car without id', async () => {

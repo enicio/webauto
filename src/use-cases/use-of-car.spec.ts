@@ -36,8 +36,8 @@ describe('Register use of car', () => {
       id: '1',
       carId: '1',
       driverId: '1',
-      startDate: new Date(),
-      finishDate: new Date(),
+      startDate: new Date().toDateString(),
+      finishDate: new Date().toDateString(),
       reason: 'teste',
     })
 
@@ -73,7 +73,7 @@ describe('Register use of car', () => {
       id: '1',
       carId: '1',
       driverId: '1',
-      startDate: new Date(),
+      startDate: new Date().toDateString(),
       reason: 'teste',
     })
 
@@ -83,7 +83,7 @@ describe('Register use of car', () => {
           id: '1',
           carId: '1',
           driverId: '1',
-          startDate: new Date(),
+          startDate: new Date().toDateString(),
           reason: 'teste',
         }),
     ).rejects.toThrowError('Driver has a car in use')

@@ -3,39 +3,38 @@ import {
   UseOfCarInput,
   UseOfCarOutput,
 } from '../use-of-car-repository'
+import { v4 as uuidv4 } from 'uuid'
 
+let inUseCar: UseOfCarInput[] = []
 export class InMemoryUseOfCarRepository implements UseCarRepository {
-  public inUseCar: UseOfCarInput[] = []
   async findById(id: string): Promise<UseOfCarOutput | null> {
-    const useCar = this.inUseCar.find((use) => use.id === id)
+    const useCar = inUseCar.find((use) => use.id === id)
     if (!useCar) {
       return null
     }
-    return useCar
+    return useCar as UseOfCarOutput
   }
 
-  getAll(): Promise<UseOfCarOutput[]> {
-    throw new Error('Method not implemented.')
+  async getAll(): Promise<UseOfCarOutput[]> {
+    return inUseCar as UseOfCarOutput[]
   }
 
   async create({
-    id = Math.random().toString(),
+    id = uuidv4(),
     carId,
     driverId,
     startDate,
     finishDate,
     reason,
   }: UseOfCarInput): Promise<UseOfCarOutput> {
-    this.inUseCar.push({
-      id: id || Math.random().toString(),
+    inUseCar.push({
+      id,
       carId,
       driverId,
       startDate,
       finishDate,
       reason,
     })
-
-    console.log('Carros em uso', this.inUseCar)
 
     return {
       id,
@@ -48,23 +47,27 @@ export class InMemoryUseOfCarRepository implements UseCarRepository {
   }
 
   async pendigCarReturn(driverId: string): Promise<UseOfCarOutput | null> {
-    const isPendingCar = this.inUseCar.find(
+    const isPendingCar = inUseCar.find(
       (use) => use.driverId === driverId && !use.finishDate,
     )
 
     if (!isPendingCar) {
       return null
     }
-    console.log('Carro em uso - inside pedingReturn', isPendingCar)
-    return isPendingCar
+
+    return isPendingCar as UseOfCarOutput
   }
 
-  async returnCar(id: string | number): Promise<UseOfCarOutput> {
-    const carToRetun = this.inUseCar.find((use) => use.id === id)
+  async returnCar(id: string, finishDate: string): Promise<UseOfCarOutput> {
+    const carToRetun = inUseCar.find((use) => use.id === id)
     if (!carToRetun) {
       throw new Error('Use not found')
     }
-    carToRetun.finishDate = new Date()
-    return carToRetun
+    carToRetun.finishDate = finishDate || new Date().toDateString()
+    return carToRetun as UseOfCarOutput
+  }
+
+  async cleanDB(): Promise<void> {
+    inUseCar = []
   }
 }

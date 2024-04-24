@@ -5,10 +5,11 @@ import { describe, expect, test } from '@jest/globals'
 import { ResgisterCarUseCase } from './register-car'
 import { ResgisterDriverUseCase } from './register-driver'
 import { UseOfCarUseCase } from './use-of-cars'
-import { ReturnOfCarUseCase } from './return-the-cars'
 
-describe('Return of the car', () => {
-  test('Should attribute a car to a driver e return it to the inventory', async () => {
+import { GetAllUseOfCarsUseCase } from './get-all-use-of-cars'
+
+describe('Get all use of car registred', () => {
+  test('Should register a car to a driver', async () => {
     const inMemoryDriverRepository = new InMemoryDriverRepository()
     const inMemoryCarRepository = new InMemoryCarRepository()
     const inMemoryUseOfCarRepository = new InMemoryUseOfCarRepository()
@@ -33,29 +34,24 @@ describe('Return of the car', () => {
       inMemoryUseOfCarRepository,
     )
 
-    const carUsed = await useOfCar.execute({
+    await useOfCar.execute({
       id: '1',
       carId: '1',
       driverId: '1',
       startDate: new Date().toDateString(),
-      reason: 'teste',
-    })
-
-    const returnOfCar = new ReturnOfCarUseCase(inMemoryUseOfCarRepository)
-
-    returnOfCar.execute({
-      driverId: carUsed.driverId,
       finishDate: new Date().toDateString(),
-    })
-
-    const userOfCar_2 = await useOfCar.execute({
-      id: '1',
-      carId: '1',
-      driverId: '1',
-      startDate: new Date().toDateString(),
       reason: 'teste',
     })
 
-    expect(userOfCar_2.finishDate).toEqual(undefined)
+    const getAllUseOfCars = new GetAllUseOfCarsUseCase(
+      inMemoryUseOfCarRepository,
+    )
+
+    const carInUse = await getAllUseOfCars.execute()
+
+    expect(carInUse.length).toEqual(1)
+    expect(carInUse[0].id).toEqual('1')
+    expect(carInUse[0].carId).toEqual('1')
+    expect(carInUse[0].reason).toEqual('teste')
   })
 })

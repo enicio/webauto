@@ -17,7 +17,6 @@ export class ResgisterDriverUseCase {
 
   async execute({ id, name }: RegisterDriver): Promise<RegisterDriverResponse> {
     const driver = await this.driverRepository.create({ id, name })
-
     return { driver }
   }
 }

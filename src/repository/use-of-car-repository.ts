@@ -1,18 +1,18 @@
 export interface UseOfCarInput {
-  id: string | number
+  id?: string
   driverId: string
   carId: string
-  startDate: Date
-  finishDate?: Date | null
+  startDate: string
+  finishDate?: string | null
   reason: string
 }
 
 export interface UseOfCarOutput {
-  id: string | number
+  id: string
   driverId: string
   carId: string
-  startDate: Date
-  finishDate?: Date | null
+  startDate: string
+  finishDate?: string | null
   reason: string
 }
 
@@ -21,5 +21,5 @@ export interface UseCarRepository {
   create(data: UseOfCarInput): Promise<UseOfCarOutput>
   getAll(): Promise<UseOfCarOutput[]>
   pendigCarReturn(driverId: string): Promise<UseOfCarOutput | null>
-  returnCar(id: string): Promise<UseOfCarOutput>
+  returnCar(id: string, finishDate: string): Promise<UseOfCarOutput>
 }
