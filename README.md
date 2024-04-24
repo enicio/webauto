@@ -23,7 +23,7 @@ O sistema possui as seguintes funcionalidades:
 ### Rotas relativas a cadastro de Motoristas
 
 
-## Cadastrar um novo motorista
+### Cadastrar um novo motorista
 
 ```http
     POST /drivers
@@ -35,7 +35,7 @@ O sistema possui as seguintes funcionalidades:
 }
 ```
 
-## Atualizar um motorista cadastrado.
+### Atualizar um motorista cadastrado.
 ```http
     PUT /drivers/
 ```
@@ -47,13 +47,13 @@ O sistema possui as seguintes funcionalidades:
 }
 ```
 
-## Recuperar um motorista pelo seu identificador único.
+### Recuperar um motorista pelo seu identificador único.
 
 ```http
     PUT /drivers/{id}
 ```
 
-## Listar os motoristas cadastrados, com filtro opcional por nome.
+### Listar os motoristas cadastrados, com filtro opcional por nome.
 
 ```http
     GET /drivers?name=Mathilda
@@ -62,12 +62,12 @@ O sistema possui as seguintes funcionalidades:
 
 ### Rotas relativas a utilização de Automóvel
 
-## Listar os registros de utilização cadastrados no sistema
+### Listar os registros de utilização cadastrados no sistema
 ```http
     GET /use-cars
 ```
 
-## Finalizar a utilização de um automóvel por um motorista.
+### Finalizar a utilização de um automóvel por um motorista.
 ```http
     PUT /use-cars
 ```
@@ -78,7 +78,7 @@ O sistema possui as seguintes funcionalidades:
 }
 ```
 
-## Criar um registro de utilização de um automóvel por um motorista.
+### Criar um registro de utilização de um automóvel por um motorista.
 ```http
     POST /use-cars
 ```
@@ -92,12 +92,12 @@ O sistema possui as seguintes funcionalidades:
 ```
 
 
-## Regras de Negócio
+### Regras de Negócio
 
 - Um automóvel só pode ser utilizado por um motorista por vez.
 - Um motorista que já esteja utilizando um automóvel não pode utilizar outro automóvel ao mesmo tempo.
 
-## Como Usar
+### Como Usar
 
 1. Clone este repositório.
 ```bash
@@ -122,7 +122,7 @@ O sistema possui as seguintes funcionalidades:
 
 6. Utilize as rotas da WebAPI conforme descrito acima para realizar as operações de cadastro, atualização, exclusão e consulta de automóveis e motoristas, bem como para registrar a utilização dos automóveis pelos motoristas.
 
-## Executando a aplicação com  docker
+### Executando a aplicação com  docker
 
 Outra opção é executar a aplicação via docker.
 Basta executar o comando abaixo para ocorrer o processo de build 
@@ -131,12 +131,13 @@ e ao fim a aplicação deverá esta disponivel para acesso.
 docker compose up
 ```
 
-## Possíveis pontos de melhoria
+### Possíveis pontos de melhoria
 
 1. Escritas de testes e2e para as rotas disponíveis.
 2. Melhorar o tratamento de erros da aplicação no geral.
+3. Implentar a persistencia de dados em banco de dados.
 
 
-## Licença
+### Licença
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
